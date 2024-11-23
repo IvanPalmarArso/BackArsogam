@@ -94,7 +94,7 @@ export const loginUser = async(req, res) => {
         })
 
         res.cookie('token', token, {
-            sameSite : 'none', secure : true, httpOnly : true, partitioned: true,             
+            sameSite : 'none', secure : true, partitioned: true,             
         })
 
         res.json({
