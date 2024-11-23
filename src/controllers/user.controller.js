@@ -101,8 +101,8 @@ export const loginUser = async(req, res) => {
             id : userFound.id,
             fullName : userFound.fullName,
             emailUser : userFound.emailUser, 
-            isAdmin : userFound.isAdmin
-            
+            isAdmin : userFound.isAdmin,
+            toke : token
         })
 
     }catch(e){
