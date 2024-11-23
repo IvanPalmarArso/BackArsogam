@@ -250,7 +250,7 @@ export const verifyToken = (req, res) => {
 
     if(!token) return res.status(401).json({message : 'Token not found'})
 
-    jwt.verify(token, process.env.passwordToken, async(err, user1) => {
+    jwt.verify(token, process.env.PASSWORD_TOKEN, async(err, user1) => {
         
         if(err) return res.status(401).json({message : 'Token Not Valid'})
 

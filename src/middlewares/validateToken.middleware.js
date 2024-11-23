@@ -9,7 +9,7 @@ const authRequired = (req, res, next) => {
 
     if(!token) return res.status(401).json({message : 'No tienes los permisos correspondientes'})
 
-    jwt.verify(token, process.env.passwordToken, (error, decoded) => {
+    jwt.verify(token, process.env.PASSWORD_TOKEN, (error, decoded) => {
         if(error) return res.status(403).json({message : 'Token invalidado'})
 
         req.user = decoded
