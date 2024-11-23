@@ -8,7 +8,7 @@ function createAccessToken(payload){
     return new Promise((resolve, reject) => {
         json.sign(
             payload,
-            process.env.passwordToken,
+            process.env.PASSWORD_TOKEN,
             {
                 expiresIn : '1d'
             },
