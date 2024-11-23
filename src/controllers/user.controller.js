@@ -54,7 +54,7 @@ export const registerUser = async(req, res) => {
             isAdmin : saveUser.isAdmin
         })
 
-        res.cookie('token', token, {sameSite : 'none', secure : true, partitioned: true,})
+        res.cookie('token', token, {sameSite : 'none', secure : true, })
 
         res.json(
             saveUser
@@ -94,11 +94,8 @@ export const loginUser = async(req, res) => {
         })
 
         res.cookie('token', token, {
-            httpOnly: true,         // Previene que el token sea accesible desde JavaScript, mejorando la seguridad
-            sameSite: 'None',       // Permite el envío de cookies en solicitudes entre dominios (CORS)
-            secure: true,           // Solo se enviará a través de conexiones HTTPS
-            maxAge: 24 * 60 * 60 * 1000,  // Establece la expiración de la cookie (1 día en este caso)
-        });
+            sameSite : 'none', secure : true, 
+        })
 
         res.json({
             id : userFound.id,
