@@ -8,6 +8,7 @@ import createAccessToken from "../libs/jwt.js";
 import bcryptjs from 'bcryptjs'
 //JWT
 import jwt from 'jsonwebtoken'
+import { Http } from "@mui/icons-material";
 
 //Register Method
 export const registerUser = async(req, res) => {
@@ -54,7 +55,7 @@ export const registerUser = async(req, res) => {
             isAdmin : saveUser.isAdmin
         })
 
-        res.cookie('token', token, {sameSite : 'none', secure : true})
+        res.cookie('token', token, {sameSite : 'none', secure : true, httpOnly : true})
 
         res.json(
             saveUser
@@ -94,7 +95,7 @@ export const loginUser = async(req, res) => {
         })
 
         res.cookie('token', token, {
-            sameSite : 'none', secure : true
+            sameSite : 'none', secure : true, httpOnly : true
         })
 
         res.json({
