@@ -1,5 +1,5 @@
 //Token Password
-import TOKEN_SECRET from '../config'
+import TOKEN_SECRET from '../config.js'
 //Json Web Token
 import json from 'jsonwebtoken'
 

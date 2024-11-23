@@ -1,7 +1,7 @@
 //JWT
 import jwt from 'jsonwebtoken'
 //Token Secret
-import TOKEN_SECRET from '../config'
+import TOKEN_SECRET from '../config.js'
 
 const authRequired = (req, res, next) => {
     const {token} = req.cookies

@@ -26,7 +26,7 @@ const app = express();
 app.use(
     cors({
         origin : ['http://localhost:5173','https://arsogam.netlify.app'],
-        credentials : true
+        credentials : true,        
     })
 )
 //Morgan
