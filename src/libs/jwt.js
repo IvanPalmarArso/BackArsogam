@@ -1,14 +1,13 @@
 //Token Password
-import dotenv from 'dotenv'
+import TOKEN_SECRET from '../config'
 //Json Web Token
 import json from 'jsonwebtoken'
-dotenv.config()
 
 function createAccessToken(payload){
     return new Promise((resolve, reject) => {
         json.sign(
             payload,
-            process.env.PASSWORD_TOKEN,
+            TOKEN_SECRET,
             {
                 expiresIn : '1d'
             },

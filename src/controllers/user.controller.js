@@ -1,6 +1,5 @@
 //Token Pass
-import dotenv from 'dotenv'
-dotenv.config()
+import TOKEN_SECRET from "../config.js";
 //User Model
 import userModel from "../model/user.model.js";
 //JsonWebToken
@@ -250,7 +249,7 @@ export const verifyToken = (req, res) => {
 
     if(!token) return res.status(401).json({message : 'Token not found'})
 
-    jwt.verify(token, process.env.PASSWORD_TOKEN, async(err, user1) => {
+    jwt.verify(token, TOKEN_SECRET, async(err, user1) => {
         
         if(err) return res.status(401).json({message : 'Token Not Valid'})
 
