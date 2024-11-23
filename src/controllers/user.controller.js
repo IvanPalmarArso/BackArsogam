@@ -54,7 +54,7 @@ export const registerUser = async(req, res) => {
             isAdmin : saveUser.isAdmin
         })
 
-        res.cookie('token', token, {sameSite : 'none', secure : true, httpOnly : true, partitioned: true,})
+        res.cookie('token', token, {sameSite : 'none', secure : true, partitioned: true,})
 
         res.json(
             saveUser
