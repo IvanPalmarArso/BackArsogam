@@ -1,3 +1,6 @@
+//Token Pass
+import dotenv from 'dotenv'
+dotenv.config()
 //User Model
 import userModel from "../model/user.model.js";
 //JsonWebToken
@@ -6,9 +9,6 @@ import createAccessToken from "../libs/jwt.js";
 import bcryptjs from 'bcryptjs'
 //JWT
 import jwt from 'jsonwebtoken'
-//Token Pass
-import dotenv from 'dotenv'
-dotenv.config()
 
 //Register Method
 export const registerUser = async(req, res) => {

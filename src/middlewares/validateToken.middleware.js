@@ -1,8 +1,8 @@
-//JWT
-import jwt from 'jsonwebtoken'
 //Token Secret
 import dotenv from 'dotenv'
 dotenv.config()
+//JWT
+import jwt from 'jsonwebtoken'
 
 const authRequired = (req, res, next) => {
     const {token} = req.cookies
