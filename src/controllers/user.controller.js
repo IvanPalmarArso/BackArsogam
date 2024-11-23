@@ -8,7 +8,6 @@ import createAccessToken from "../libs/jwt.js";
 import bcryptjs from 'bcryptjs'
 //JWT
 import jwt from 'jsonwebtoken'
-import { Http } from "@mui/icons-material";
 
 //Register Method
 export const registerUser = async(req, res) => {
