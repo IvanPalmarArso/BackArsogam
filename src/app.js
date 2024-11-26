@@ -24,7 +24,12 @@ const app = express();
 
 //Cors
 app.use(
-    cors()
+    cors({       
+        origin: ['http://localhost:5173'],
+        methods: ['GET', 'POST', 'OPTIONS','PUT'], 
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'],
+        credentials : true,        
+    })
 )
 //Morgan
 app.use(morgan('dev'))
@@ -41,9 +46,9 @@ app.use('/uploads', express.static(path.join(__dirname,'uploads')))
 
 //Request Options
 app.options('*', (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT')
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Custom-Header')
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Custom-Header')
     res.send()
 })
 //Mail Router
