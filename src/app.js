@@ -24,7 +24,9 @@ const app = express();
 
 //Cors
 app.use(
-    cors({                       
+    cors({       
+        origin: 'https://arsogam.netlify.app/',                
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'],
         credentials : true,        
     })
 )
@@ -42,8 +44,7 @@ const __dirname = dirname(__filename)
 app.use('/uploads', express.static(path.join(__dirname,'uploads')))
 
 //Request Options
-app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', 'https://arsogam.netlify.app/')    
+app.use((req, res, next) => {    
     res.append('Access-Control-Allow-Headers', 'Content-Type, Origin')    
     next()
 })
