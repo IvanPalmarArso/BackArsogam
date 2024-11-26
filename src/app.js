@@ -23,13 +23,13 @@ import { dirname } from "path";
 const app = express();
 
 //Cors
-app.use(
-    cors({       
-        origin: 'https://arsogam.netlify.app/',                
-        allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'],
-        credentials : true,        
-    })
-)
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', 'http://localhost:5173')
+    res.append('Access-Control-Allow-Methods', 'GET, DELETE, POST, PUT')
+    res.append('Access-Control-Allow-Headers', 'Content-Type, Origin')
+    res.append()
+    next()
+})
 //Morgan
 app.use(morgan('dev'))
 //App Json
@@ -42,12 +42,6 @@ app.use(express.urlencoded({extended : true}))
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 app.use('/uploads', express.static(path.join(__dirname,'uploads')))
-
-//Request Options
-app.use((req, res, next) => {    
-    res.append('Access-Control-Allow-Headers', 'Content-Type, Origin')    
-    next()
-})
 //Mail Router
 app.use('/api', emailHelperR)
 //PQR Router
