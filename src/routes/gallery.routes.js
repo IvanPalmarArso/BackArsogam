@@ -9,13 +9,14 @@ import { allGalleryImage } from "../controllers/gallery.controller.js";
 //Middleware
 import authRequired from "../middlewares/validateToken.middleware.js";
 import checkAuth from "../middlewares/roleAuth.middleware.js";
+import { HeaderMiddleware } from "../middlewares/headers.middleware.js";
 //Uploads Image
 import uploads from "../middlewares/uploadFile.middleware.js";
 
 const galleryRouter = new Router()
 
 //New GalleryImage
-galleryRouter.post('/newGallery', authRequired, checkAuth, uploads.single('galleryImage'), newGalleryImage)
+galleryRouter.post('/newGallery', authRequired, checkAuth, HeaderMiddleware, uploads.single('galleryImage'), newGalleryImage)
 
 //Update GalleryImage
 galleryRouter.put('/updateGallery/:id', authRequired, checkAuth, uploads.single('galleryImage'),updateGalleryImage)

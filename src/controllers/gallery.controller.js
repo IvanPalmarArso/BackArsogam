@@ -22,10 +22,7 @@ export const newGalleryImage = async (req, res) => {
         })
 
         const saveNewGalleryImage = await newImageGallery.save()
-
-        res.header('Access-Control-Allow-Origin', 'https://arsogam.netlify.app')
-        res.header('Access-Control-Allow-Headers','Content-Type, Authorization, X-Custom-Header')
-        res.send()
+        
         res.status(201).json(saveNewGalleryImage)        
 
 
