@@ -15,7 +15,7 @@ import uploads from "../middlewares/uploadFile.middleware.js";
 const galleryRouter = new Router()
 
 //New GalleryImage
-galleryRouter.post('/newGallery', authRequired, checkAuth, uploads.single('galleryImage'), newGalleryImage)
+galleryRouter.post('/newGallery', authRequired, checkAuth,newGalleryImage)
 
 //Update GalleryImage
 galleryRouter.put('/updateGallery/:id', authRequired, checkAuth, uploads.single('galleryImage'),updateGalleryImage)
