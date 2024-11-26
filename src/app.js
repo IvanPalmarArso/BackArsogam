@@ -25,9 +25,9 @@ const app = express();
 //Cors
 app.use(
     cors({       
-        origin : 'https://arsogam.netlify.app' ,
-        methods : ['GET','POST','DELETE','PUT'],
-        allowedHeaders : ['Content-Type', 'Authorization'],
+        origin: 'https://arsogam.netlify.app',
+        methods: ['GET', 'POST', 'OPTIONS'], 
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'],
         credentials : true,        
     })
 )
