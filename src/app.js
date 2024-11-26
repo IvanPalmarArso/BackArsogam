@@ -45,11 +45,12 @@ const __dirname = dirname(__filename)
 app.use('/uploads', express.static(path.join(__dirname,'uploads')))
 
 //Request Options
-app.options('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173')
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Custom-Header')
-    res.send()
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*'])
+    res.append('Access-Control-Allow-Methods', 'GET, DELETE, POST, PUT')
+    res.append('Access-Control-Allow-Headers', 'Content-Type, Origin')
+    res.append()
+    next()
 })
 //Mail Router
 app.use('/api', emailHelperR)
