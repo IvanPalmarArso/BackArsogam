@@ -25,7 +25,7 @@ const app = express();
 //Cors
 app.use(
     cors({       
-        origin : 'http://localhost:5173' ,
+        origin : 'https://arsogam.netlify.app/' ,
         credentials : true,        
     })
 )
@@ -35,7 +35,8 @@ app.use(morgan('dev'))
 app.use(express.json())
 //Cookies parser
 app.use(cookieParser())
-
+//Parsign application
+app.use(express.urlencoded({extended : true}))
 //Static Files
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
