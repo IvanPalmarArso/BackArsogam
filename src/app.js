@@ -25,7 +25,7 @@ const app = express();
 //Cors
 app.use(
     cors({       
-        origin: 'http://localhost:5173',                
+        origin: 'https://arsogam.netlify.app/',                
         allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'],
         credentials : true,        
     })
@@ -45,7 +45,7 @@ app.use('/uploads', express.static(path.join(__dirname,'uploads')))
 
 //Request Options
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', 'http://localhost:5173')    
+    res.append('Access-Control-Allow-Origin', 'https://arsogam.netlify.app/')    
     res.append('Access-Control-Allow-Headers', 'Content-Type, Origin')    
     next()
 })
