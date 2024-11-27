@@ -6,15 +6,14 @@ import { uploadImage } from "../middlewares/cloudinary.middlewware.js";
 //Create Gallery image
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
-
-    if(req.file?.galleryImage){
-        const result = await uploadImage(req.file.path)            
-        res.status(200).json({
-            name : nameImage,
-            gallery : result.secure_url,
-            idUser : req.user.id    
-        })
-    }            
+    
+    const result = await uploadImage(req.file.path)            
+    res.status(200).json({
+        name : nameImage,
+        gallery : result.secure_url,
+        idUser : req.user.id    
+    })
+    
 
     /*try{        
     
