@@ -24,6 +24,7 @@ const app = express();
 
 //Cors
 app.use(cors({
+    origin : 'https://arsogam.netlify.app',
     credentials : true
 }))
 //Morgan
