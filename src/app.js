@@ -23,13 +23,7 @@ import { dirname } from "path";
 const app = express();
 
 //Cors
-app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', "https://arsogam.netlify.app")
-    res.append('Access-Control-Allow-Methods', "GET, DELETE, POST, PUT")
-    res.append('Access-Control-Allow-Headers', "Content-Type, Origin")
-    res.append('Access-Control-Allow-Credentials', "true")
-    next()
-})
+app.use(cors())
 //Morgan
 app.use(morgan('dev'))
 //App Json
