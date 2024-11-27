@@ -7,7 +7,7 @@ import cloudinary from "../middlewares/cloudinary.middlewware.js";
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
 
-    const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
+    const galleryImageUrl = cloudinary.uploader.upload(req.file.path,{transformation : {
         height : 100,
         width : 100,
         quality : 85
