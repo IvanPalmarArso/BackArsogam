@@ -5,18 +5,15 @@ import eventModel from "../model/event.model.js";
 //New Event
 export const newEvent = async(req, res) => {
     const {nameEvent} = req.body    
-
-    const imageEventUrl = await cloudinary.uploader.upload(req.file.path, {transformation : {
-        width : 100,
-        height : 100,
-        quality : 85
-    }})
+    const imageEvent = req.file.filename
 
     try{
 
+        const imageEventUrl = `${req.protocol}://${req.get('host')}/uploads/${imageEvent}`
+
         const newEventPost = new eventModel({
             nameEvent : nameEvent,
-            imageEvent : imageEventUrl.url,
+            imageEvent : imageEventUrl,
             idUser : req.user.id
         })
 
@@ -34,14 +31,11 @@ export const newEvent = async(req, res) => {
 export const updateEvent = async (req, res) => {
     const {id} = req.params
     const {nameEvent} = req.body    
-
-    const imageEventUrl = await cloudinary.uploader.upload(req.file.path, {transformation : {
-        width : 100,
-        height : 100,
-        quality : 85
-    }})
+    const imageEvent = req.file.filename    
 
     try{
+
+        const imageEventUrl = `${req.protocol}://${req.get('host')}/uploads/${imageEvent}`
 
         //Event Found
         const eventFound = await eventModel.findByPk(id)
@@ -49,7 +43,7 @@ export const updateEvent = async (req, res) => {
         if(!eventFound) return res.status(404).json({message : 'Evento no encontrado'})
 
         eventFound.nameEvent = nameEvent
-        eventFound.imageEvent = imageEventUrl.url
+        eventFound.imageEvent = imageEventUrl
         eventFound.idUser = req.user.id
 
         await eventFound.save()

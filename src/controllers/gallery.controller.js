@@ -11,13 +11,6 @@ export const newGalleryImage = async (req, res) => {
     const galleryImage = req.file.filename
 
     try{        
-    
-        /*const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
-            height : 100,
-            width : 100,
-            quality : 85
-        }})*/
-
         const galleryImageUrl = `${req.protocol}://${req.get('host')}/uploads/${galleryImage}`
 
         const newImageGallery = new galleryModel({
@@ -39,23 +32,19 @@ export const newGalleryImage = async (req, res) => {
 //Update Gallery image
 export const updateGalleryImage = async (req, res) => {
     const {id} = req.params
-    const {nameImage} = req.body
-    
-    /*const galleryImageUrl = await cloudinary.uploader.upload(req.file.path, {transformation : {
-        width : 100,
-        height : 100,
-        quality : 85
-    }})
+    const {nameImage} = req.body    
+    const galleryImage = req.file.filename
 
     try{
+        
+        const galleryImageUrl = `${req.protocol}://${req.get('host')}/uploads/${galleryImage}`
 
-        //Image Gallery
         const foundGalleryImage = await galleryModel.findByPk(id)
 
         if(!foundGalleryImage) return res.status(404).json({message : 'La imagen de la galeria no se ha podido encontrar'})
 
         foundGalleryImage.nameImage = nameImage
-        foundGalleryImage.galleryImage = galleryImageUrl.url
+        foundGalleryImage.galleryImage = galleryImageUrl
         foundGalleryImage.idUser = req.user.id        
 
         await foundGalleryImage.save()
@@ -66,7 +55,7 @@ export const updateGalleryImage = async (req, res) => {
 
     }catch(err){
         return res.status(500).json({message : err.message})
-    }*/
+    }
 }
 
 //Delete Gallery image
