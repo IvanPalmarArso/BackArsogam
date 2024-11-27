@@ -7,13 +7,14 @@ import fs from 'fs-extra'
 //Create Gallery image
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
+
+    const {galleryImage} = req.file.filename
     
-    try{
-        const result = await uploadImage(req.file.path)                    
+    try{        
     
         res.status(200).json({
             name : nameImage,
-            gallery : result.secure_url,
+            gallery : galleryImage,
             idUser : req.user.id    
         })
     }catch(e){
