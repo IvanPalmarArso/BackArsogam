@@ -2,12 +2,16 @@
 import galleryModel from "../model/gallery.model.js";
 //Cloudinary
 import { uploadImage } from "../middlewares/cloudinary.middlewware.js";
+import fs, { unlink } from 'fs-extra'
 
 //Create Gallery image
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
     
     const result = await uploadImage(req.file.path)            
+
+    await fs.unlink(req.file.path)
+
     res.status(200).json({
         name : nameImage,
         gallery : result.secure_url,
