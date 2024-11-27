@@ -8,7 +8,7 @@ import fs from 'fs-extra'
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
 
-    const {galleryImage} = req.file.filename
+    const galleryImage = req.file.filename
     
     try{        
     
