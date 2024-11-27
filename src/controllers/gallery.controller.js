@@ -8,15 +8,17 @@ import fs from 'fs-extra'
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
     
-    const result = await uploadImage(req.file.path)            
-
-    await fs.unlink(req.file.path)
-
-    res.status(200).json({
-        name : nameImage,
-        gallery : result.secure_url,
-        idUser : req.user.id    
-    })
+    try{
+        const result = await uploadImage(req.file.path)                    
+    
+        res.status(200).json({
+            name : nameImage,
+            gallery : result.secure_url,
+            idUser : req.user.id    
+        })
+    }catch(e){
+        return res.status(500).json({message : err.message});
+    }
     
 
     /*try{        
