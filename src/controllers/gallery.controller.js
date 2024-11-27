@@ -5,23 +5,21 @@ import cloudinary from "../middlewares/cloudinary.middlewware.js";
 
 //Create Gallery image
 export const newGalleryImage = async (req, res) => {
-    const {nameImage} = req.body
+    const {nameImage} = req.body        
 
-    const galleryImage = req.file.path
-
-    res.status(200).json({
-        name : nameImage,
-        gallery : galleryImage,
-        idUser : req.user.id    
-    })
-
-    /*const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
+    const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
         height : 100,
         width : 100,
         quality : 85
-    }})    
+    }})
 
-    try{        
+    res.status(200).json({
+        name : nameImage,
+        gallery : galleryImageUrl.url,
+        idUser : req.user.id    
+    })
+
+    /*try{        
 
         const newImageGallery = new galleryModel({
             nameImage : nameImage,
@@ -31,7 +29,7 @@ export const newGalleryImage = async (req, res) => {
 
         const saveNewGalleryImage = await newImageGallery.save()
         
-        res.status(201).json(saveNewGalleryImage)        
+        res.status(200).json(saveNewGalleryImage)        
 
 
     }catch(err){
