@@ -11,7 +11,8 @@ export const newGalleryImage = async (req, res) => {
 
     res.status(200).json({
         name : nameImage,
-        gallery : galleryImage
+        gallery : galleryImage,
+        idUser : req.user.id    
     })
 
     /*const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
