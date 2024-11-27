@@ -8,7 +8,7 @@ import { uploadImage } from "../middlewares/cloudinary.middlewware.js";
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
 
-    if(req.file){
+    if(req.file?.galleryImage){
         const result = await uploadImage(req.file.path)            
         res.status(200).json({
             name : nameImage,
