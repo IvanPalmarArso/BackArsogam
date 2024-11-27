@@ -23,7 +23,9 @@ import { dirname } from "path";
 const app = express();
 
 //Cors
-app.use(cors())
+app.use(cors({
+    credentials : true
+}))
 //Morgan
 app.use(morgan('dev'))
 //App Json
