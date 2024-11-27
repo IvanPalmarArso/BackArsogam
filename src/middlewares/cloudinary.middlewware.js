@@ -16,6 +16,9 @@ export const uploadImage = async(filePath) => {
             height : 100,
             width : 100,
             quality : 85
+        },
+        Headers : {
+            'Access-Control-Allow-Origin' : 'https://arsogam.netlify.app'
         }
     })
 }
