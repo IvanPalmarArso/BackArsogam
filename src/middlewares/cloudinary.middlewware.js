@@ -19,3 +19,5 @@ export const uploadImage = async(filePath) => {
         }
     })
 }
+
+export default cloudinary
