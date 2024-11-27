@@ -1,7 +1,6 @@
 //Gallery Model
 import galleryModel from "../model/gallery.model.js";
 //Cloudinary
-import cloudinary from "../middlewares/cloudinary.middlewware.js";
 import { uploadImage } from "../middlewares/cloudinary.middlewware.js";
 
 //Create Gallery image
@@ -46,7 +45,7 @@ export const updateGalleryImage = async (req, res) => {
     const {id} = req.params
     const {nameImage} = req.body
     
-    const galleryImageUrl = await cloudinary.uploader.upload(req.file.path, {transformation : {
+    /*const galleryImageUrl = await cloudinary.uploader.upload(req.file.path, {transformation : {
         width : 100,
         height : 100,
         quality : 85
@@ -71,7 +70,7 @@ export const updateGalleryImage = async (req, res) => {
 
     }catch(err){
         return res.status(500).json({message : err.message})
-    }
+    }*/
 }
 
 //Delete Gallery image
