@@ -9,30 +9,20 @@ export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
 
     const galleryImage = req.file.filename
-    
+
     try{        
     
-        res.status(200).json({
-            name : nameImage,
-            gallery : galleryImage,
-            idUser : req.user.id    
-        })
-    }catch(e){
-        return res.status(500).json({message : err.message});
-    }
-    
-
-    /*try{        
-    
-        const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
+        /*const galleryImageUrl = await cloudinary.uploader.upload(req.file.path,{transformation : {
             height : 100,
             width : 100,
             quality : 85
-        }})
+        }})*/
+
+        const galleryImageUrl = `${req.protocol}://${req.get('host')}/uploads/${galleryImage}`
 
         const newImageGallery = new galleryModel({
             nameImage : nameImage,
-            galleryImage : galleryImageUrl.url,
+            galleryImage : galleryImageUrl,
             idUser : req.user.id
         })
 
@@ -43,7 +33,7 @@ export const newGalleryImage = async (req, res) => {
 
     }catch(err){
         return res.status(500).json({message : err.message});
-    }*/
+    }
 }
 
 //Update Gallery image
