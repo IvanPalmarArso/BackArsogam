@@ -10,4 +10,12 @@ cloudinary.config({
     api_secret : process.env.CLOUDINARY_SECRET_KEY,      
 })
 
-export default cloudinary
+export const uploadImage = async(filePath) => {
+    return await cloudinary.uploader.upload(filePath,{
+        transformation : {
+            height : 100,
+            width : 100,
+            quality : 85
+        }
+    })
+}
