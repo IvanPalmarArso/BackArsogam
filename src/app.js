@@ -11,6 +11,7 @@ import userRouter from "./routes/user.routes.js";
 import galleryRouter from "./routes/gallery.routes.js";
 import eventsRouter from "./routes/event.routes.js";
 import newRouter from "./routes/new.routes.js";
+import infoRouter from "./routes/info.routes.js";
 //Dotenv
 import dotenv from 'dotenv'
 dotenv.config()
@@ -51,5 +52,7 @@ app.use('/api', galleryRouter)
 app.use('/api', eventsRouter)
 //NewRouter
 app.use('/api', newRouter)
+//InfoRouter
+app.use('/api', infoRouter)
 
 export default app

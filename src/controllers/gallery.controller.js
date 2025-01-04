@@ -1,8 +1,5 @@
 //Gallery Model
 import galleryModel from "../model/gallery.model.js";
-//Cloudinary
-import { uploadImage } from "../middlewares/cloudinary.middlewware.js";
-import fs from 'fs-extra'
 
 //Create Gallery image
 export const newGalleryImage = async (req, res) => {
