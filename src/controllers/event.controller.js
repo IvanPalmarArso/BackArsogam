@@ -8,7 +8,11 @@ export const newEvent = async(req, res) => {
     const {nameEvent} = req.body    
     const imageEvent = req.file.path
 
-    const imgCloud = await cloudinary.uploader.upload(imageEvent, uploadOption)    
+    const imgCloud = await cloudinary.uploader.upload(imageEvent, { 
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"]},
+        {transformation : {width : 100, height : 100, quality : 80}}        
+        )    
     
     try{    
         const newEventPost = new eventModel({
