@@ -11,9 +11,9 @@ export const newEvent = async(req, res) => {
         resource_type: "auto",
         allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
         transformation: {
-            width: 100,
-            height: 100,
-            quality: 80
+            width: 600,
+            height: 600,
+            quality: 85
         }
     });
     
