@@ -27,7 +27,7 @@ export const newEvent = async(req, res) => {
 
         const saveNewEvent = await newEventPost.save()
 
-        res.status(200).json(saveNewEvent)
+        res.status(200).json(saveNewEvent, imgCloud.url)
 
     }catch(e){
         return res.status(500).json({message : e.message});
