@@ -5,8 +5,16 @@ import eventModel from "../model/event.model.js";
 //New Event
 export const newEvent = async(req, res) => {
     const {nameEvent} = req.body    
-    const imageEvent = req.file.filename
+    const imageEvent = req.file.path
 
+    const imgCloud = await cloudinary.uploader.upload(imageEvent, {transformation : {
+        width : 100,
+        height : 80,
+        quality : 80
+    }})
+
+    console.log(imgCloud.url)
+    
     try{
 
         const imageEventUrl = `${req.protocol}://${req.get('host')}/uploads/${imageEvent}`
