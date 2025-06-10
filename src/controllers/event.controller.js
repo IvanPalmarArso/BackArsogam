@@ -7,7 +7,7 @@ export const newEvent = async(req, res) => {
     const {nameEvent} = req.body    
     const imageEvent = req.file.path
 
-    const imgCloud = await cloudinary.uploader.upload(imageEvent, {transformation : {
+    const imgCloud = await cloudinary.uploader.upload_large(imageEvent, {transformation : {
         width : 100,
         height : 80,
         quality : 80
