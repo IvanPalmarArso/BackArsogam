@@ -14,6 +14,21 @@ export const newEvent = async(req, res) => {
     }})
 
     console.log(imgCloud.url)
+    
+    try{    
+        const newEventPost = new eventModel({
+            nameEvent : nameEvent,
+            imageEvent : imgCloud.url,
+            idUser : req.user.id
+        })
+
+        const saveNewEvent = await newEventPost.save()
+
+        res.status(200).json(saveNewEvent, imgCloud.url)
+
+    }catch(e){
+        return res.status(500).json({message : e.message});
+    }
 
 }
 
