@@ -1,6 +1,5 @@
 //Event Model
 import cloudinary from "../middlewares/cloudinary.middlewware.js";
-import uploadOption from "../middlewares/cloudinaryOptions.js";
 import eventModel from "../model/event.model.js";
 
 //New Event
@@ -8,11 +7,15 @@ export const newEvent = async(req, res) => {
     const {nameEvent} = req.body    
     const imageEvent = req.file.path
 
-    const imgCloud = await cloudinary.uploader.upload(imageEvent, { 
+  const imgCloud = await cloudinary.uploader.upload(imageEvent, {
         resource_type: "auto",
-        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"]},
-        {transformation : {width : 100, height : 100, quality : 80}}        
-        )    
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 100,
+            height: 100,
+            quality: 80
+        }
+    });
     
     try{    
         const newEventPost = new eventModel({
