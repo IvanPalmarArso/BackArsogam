@@ -26,7 +26,9 @@ const app = express();
 //Cors
 app.use(cors({
     origin : ['https://arsogam.com','https://arsogam.netlify.app','http://localhost:5173','https://backarsogam-production.up.railway.app'],
-    credentials : true
+    credentials : true,
+    methods : ['POST', 'PUT', 'DELETE', 'OPTIONS', 'GET'],
+    allowedHeaders : ['Content-Type', 'Authorization']
 }))
 //Morgan
 app.use(morgan('dev'))
