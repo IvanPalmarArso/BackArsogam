@@ -38,11 +38,19 @@ export const newEvent = async(req, res) => {
 export const updateEvent = async (req, res) => {
     const {id} = req.params
     const {nameEvent} = req.body    
-    const imageEvent = req.file.filename    
+    const imageEvent = req.file.path    
 
-    try{
+    const cloudEven = await cloudinary.uploader.upload(imageEvent,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
 
-        const imageEventUrl = `${req.protocol}://${req.get('host')}/uploads/${imageEvent}`
+    try{        
 
         //Event Found
         const eventFound = await eventModel.findByPk(id)
@@ -50,7 +58,7 @@ export const updateEvent = async (req, res) => {
         if(!eventFound) return res.status(404).json({message : 'Evento no encontrado'})
 
         eventFound.nameEvent = nameEvent
-        eventFound.imageEvent = imageEventUrl
+        eventFound.imageEvent = cloudEven.url
         eventFound.idUser = req.user.id
 
         await eventFound.save()

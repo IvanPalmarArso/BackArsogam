@@ -1,16 +1,24 @@
 //Info Model
+import cloudinary from "../middlewares/cloudinary.middlewware.js";
 import infoModel from "../model/info.model.js";
 
 //Create Info Video
 export const newInfoVideo = async(req, res) => {
-    const videoInfo = req.file.filename
+    const videoInfo = req.file.path
 
-    try{
+    const cloudInfo = await cloudinary.uploader.upload(videoInfo,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
 
-        const videoInfoUrl = `${req.protocol}://${req.get('host')}/uploads/${videoInfo}`
-
+    try{        
         const newInfo = new infoModel({
-            infoVideo : videoInfoUrl
+            infoVideo : cloudInfo.url
         })
 
         const saveNewInfo = await newInfo.save()
@@ -25,17 +33,24 @@ export const newInfoVideo = async(req, res) => {
 //UpdateInfo 
 export const updateInfoVideo = async (req, res) => {
     const {id} = req.params
-    const videoInfo = req.file.filename
+    const videoInfo = req.file.path
 
-    try{
+    const cloudVideo = await cloudinary.uploader.upload(videoInfo,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
 
-        const videoInfoUrl = `${req.protocol}://${req.get('host')}/uploads/${videoInfo}`
-
+    try{        
         const foundInfoVideo = await infoModel.findByPk(id)
 
         if(!foundInfoVideo) return res.status(404).json({message : 'El video no fue encontrado.'})
 
-        foundInfoVideo.infoVideo = videoInfoUrl
+        foundInfoVideo.infoVideo = cloudVideo.url
         
         await foundInfoVideo.save()
 

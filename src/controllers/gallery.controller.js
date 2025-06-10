@@ -1,18 +1,27 @@
 //Gallery Model
+import cloudinary from "../middlewares/cloudinary.middlewware.js";
 import galleryModel from "../model/gallery.model.js";
 
 //Create Gallery image
 export const newGalleryImage = async (req, res) => {
     const {nameImage} = req.body        
 
-    const galleryImage = req.file.filename
+    const galleryImage = req.file.path
 
-    try{        
-        const galleryImageUrl = `${req.protocol}://${req.get('host')}/uploads/${galleryImage}`
+    const cloudGall = await cloudinary.uploader.upload(galleryImage,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
 
+    try{               
         const newImageGallery = new galleryModel({
             nameImage : nameImage,
-            galleryImage : galleryImageUrl,
+            galleryImage : cloudGall.url,
             idUser : req.user.id
         })
 
@@ -32,16 +41,24 @@ export const updateGalleryImage = async (req, res) => {
     const {nameImage} = req.body    
     const galleryImage = req.file.filename
 
-    try{
-        
-        const galleryImageUrl = `${req.protocol}://${req.get('host')}/uploads/${galleryImage}`
+    const cloudGall = await cloudinary.uploader.upload(galleryImage,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
+
+    try{            
 
         const foundGalleryImage = await galleryModel.findByPk(id)
 
         if(!foundGalleryImage) return res.status(404).json({message : 'La imagen de la galeria no se ha podido encontrar'})
 
         foundGalleryImage.nameImage = nameImage
-        foundGalleryImage.galleryImage = galleryImageUrl
+        foundGalleryImage.galleryImage = cloudGall.url
         foundGalleryImage.idUser = req.user.id        
 
         await foundGalleryImage.save()

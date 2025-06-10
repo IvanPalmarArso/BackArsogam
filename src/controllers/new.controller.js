@@ -6,15 +6,22 @@ import cloudinary from "../middlewares/cloudinary.middlewware.js";
 //New New
 export const newNew = async(req, res) => {
     const {newName, textNew} = req.body         
-    const imageNew = req.file.filename
+    const imageNew = req.file.path
 
-    try{
+    const cloudNew = await cloudinary.uploader.upload(imageNew,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
 
-        const imageNewUrl = `${req.protocol}://${req.get('host')}/uploads/${imageNew}`
-
+    try{        
         const newNewPost = new newModel({
             newName : newName,
-            imageNew : imageNewUrl,
+            imageNew : cloudNew.url,
             textNew : textNew,
             idUser : req.user.id
         })
@@ -32,12 +39,19 @@ export const newNew = async(req, res) => {
 export const updateNew = async(req, res) => {
     const {id} = req.params
     const {newName, textNew} = req.body
-    const imageNew = req.file.filename
+    const imageNew = req.file.path
+
+    const cloudNew = await cloudinary.uploader.upload(imageNew,{
+        resource_type: "auto",
+        allowed_formats: ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi", "webm"],
+        transformation: {
+            width: 600,
+            height: 600,
+            quality: 85
+        }
+    })
 
     try{
-
-        const imageNewUrl = `${req.protocol}://${req.get('host')}/uploads/${imageNew}`
-
         //New Found
         const newFound = await newModel.findByPk(id)
 
@@ -45,7 +59,7 @@ export const updateNew = async(req, res) => {
 
         newFound.newName = newName
         newFound.textNew = textNew
-        newFound.imageNew = imageNewUrl
+        newFound.imageNew = cloudNew.url
         newFound.idUser  = req.user.id
 
         await newFound.save()
